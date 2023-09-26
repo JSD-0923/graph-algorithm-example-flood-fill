@@ -1,16 +1,35 @@
-// Define variables and setup function
+let img;
+
 function setup() {
-    // Create a canvas of a specific size
     createCanvas(400, 400);
-    // Set background color or other setup configurations
+    let fileInput = select('#imageUpload');
+    fileInput.changed(handleImageUpload);
 }
 
-// Main drawing function
 function draw() {
-    // Your drawing and interaction code goes here
 }
 
-// Function to handle mouse click event
-function mouseClicked() {
-    // Implement your Flood Fill logic here when the mouse is clicked
+function mouseClicked(evt) {
+    if (evt.target.id == 'defaultCanvas0') {
+        // Flood fill at mouse position
+        let x = mouseX;
+        let y = mouseY;
+
+        ellipse(x, y, 10, 10);
+
+        // prevent default
+        return false;
+    }
+}
+
+function handleImageUpload() {
+    let file = select('#imageUpload').elt.files[0];
+
+    if (file.type.includes('image')) {
+        img = loadImage(window.URL.createObjectURL(file), () => {
+            image(img, 0, 0);
+        })
+    } else {
+        alert('Please select a valid image file.');
+    }
 }
