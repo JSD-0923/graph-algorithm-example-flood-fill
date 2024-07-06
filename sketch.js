@@ -1,4 +1,5 @@
 let img;
+const fillColor = [255, 0, 255, 255]
 
 function setup() {
     createCanvas(400, 400);
@@ -6,8 +7,6 @@ function setup() {
     fileInput.changed(handleImageUpload);
 }
 
-function draw() {
-}
 
 function mouseClicked(evt) {
     if (evt.target.id == 'defaultCanvas0') {
@@ -15,7 +14,8 @@ function mouseClicked(evt) {
         let x = mouseX;
         let y = mouseY;
 
-        ellipse(x, y, 10, 10);
+
+        floodFill(x, y, fillColor);
 
         // prevent default
         return false;
@@ -33,3 +33,12 @@ function handleImageUpload() {
         alert('Please select a valid image file.');
     }
 }
+
+
+/**
+ * Implement flood fill algorithm
+ */
+function floodFill(x, y, color) {
+    ellipse(x, y, 10, 10);
+}
+
